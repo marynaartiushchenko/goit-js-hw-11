@@ -3,8 +3,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 // main.js (for common functionalities)
-import "./search.js";
-import "./gallery.js";
+
 
 // search.js
 const apiKey = "41734083-bc7e7acddd543bb8e35e20b9d";
