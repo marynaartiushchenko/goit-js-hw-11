@@ -10,7 +10,7 @@ import "izitoast/dist/css/iziToast.min.css";
       const galleryContainer = document.getElementById("gallery");
       const loader = document.getElementById("loader");
 
-      const lightbox = new SimpleLightbox();
+const lightbox = new SimpleLightbox();
 
       searchForm.addEventListener("submit", async (event) => {
         event.preventDefault();
