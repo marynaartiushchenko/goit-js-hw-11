@@ -9,7 +9,10 @@ import "izitoast/dist/css/iziToast.min.css";
       const galleryContainer = document.getElementById("gallery");
       const loader = document.getElementById("loader");
 
-const lightbox = new SimpleLightbox();
+ const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
       searchForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -62,24 +65,22 @@ const lightbox = new SimpleLightbox();
         }
       });
 
-      function updateGallery(images) {
+     function updateGallery(images) {
         // Clear existing gallery content
-        galleryContainer.innerHTML = "";
+         galleryContainer.innerHTML = "";
 
-        images.forEach((image) => {
-          const imageElement = document.createElement("a");
-          imageElement.href = image.largeUrl;
-          imageElement.dataset.lightbox = "gallery";
-          imageElement.dataset.title = `Likes: ${image.likes}, Views: ${image.views}, Comments: ${image.comments}, Downloads: ${image.downloads}`;
+  const galleryMarkup = images
+    .map(
+      (image) => `
+        <a href="${image.largeUrl}" data-lightbox="gallery" data-title="Likes: ${image.likes}, Views: ${image.views}, Comments: ${image.comments}, Downloads: ${image.downloads}">
+          <img src="${image.url}" alt="${image.alt}" />
+        </a>
+      `
+    )
+    .join('');
 
-          const img = document.createElement("img");
-          img.src = image.url;
-          img.alt = image.alt;
-
-          imageElement.appendChild(img);
-          galleryContainer.appendChild(imageElement);
-        });
+  galleryContainer.innerHTML = galleryMarkup;
 
         // Refresh the lightbox after updating the gallery
-        lightbox.refresh();
-      }
+  lightbox.refresh();
+}
